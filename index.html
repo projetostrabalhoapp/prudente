@@ -1,0 +1,3234 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+
+
+  <meta
+
+    name="viewport"
+
+    content="width=device-width, initial-scale=1.0"
+
+  >
+
+
+
+  <title>Semana de Libertação & Batalha Espiritual</title>
+
+
+
+  <style>
+
+    *{
+
+      box-sizing:border-box;
+
+    }
+
+
+
+    html,
+
+    body{
+
+      margin:0;
+
+      padding:0;
+
+      width:100%;
+
+      height:100%;
+
+      overflow:hidden;
+
+      font-family:Arial,Helvetica,sans-serif;
+
+      color:#fff;
+
+    }
+
+
+
+    /* =====================================================
+
+       FUNDO - IMAGEM HOSPEDADA NO GITHUB
+
+    ===================================================== */
+
+
+
+    body{
+
+      background:
+
+        linear-gradient(
+
+          rgba(0,0,0,.15),
+
+          rgba(0,0,0,.28)
+
+        ),
+
+        url("./fundo.png");
+
+
+
+      background-size:cover;
+
+      background-position:center center;
+
+      background-repeat:no-repeat;
+
+      background-attachment:fixed;
+
+    }
+
+
+
+    body:before{
+
+      content:"";
+
+      position:fixed;
+
+      inset:0;
+
+
+
+      background:
+
+        radial-gradient(
+
+          circle at center,
+
+          transparent 30%,
+
+          rgba(0,0,0,.12) 100%
+
+        );
+
+
+
+      pointer-events:none;
+
+    }
+
+
+
+    /* =====================================================
+
+       PAINEL
+
+    ===================================================== */
+
+
+
+    .app{
+
+      position:relative;
+
+      z-index:1;
+
+
+
+      width:98vw;
+
+      height:100vh;
+
+
+
+      margin:auto;
+
+
+
+      padding:
+
+        clamp(5px,.8vh,10px)
+
+        clamp(10px,1vw,20px);
+
+
+
+      display:grid;
+
+
+
+      grid-template-rows:
+
+        auto
+
+        auto
+
+        minmax(0,1fr)
+
+        auto
+
+        auto;
+
+
+
+      gap:clamp(4px,.65vh,8px);
+
+
+
+      overflow:hidden;
+
+    }
+
+
+
+    /* =====================================================
+
+       CABEÇALHO
+
+    ===================================================== */
+
+
+
+    .header{
+
+      position:relative;
+
+
+
+      display:flex;
+
+      justify-content:center;
+
+      align-items:center;
+
+
+
+      text-align:center;
+
+
+
+      min-height:0;
+
+
+
+      padding:
+
+        clamp(2px,.4vh,6px)
+
+        170px;
+
+
+
+      border-bottom:
+
+        1px solid rgba(255,0,0,.35);
+
+    }
+
+
+
+    .titulo-pequeno{
+
+      font-family:Georgia,serif;
+
+
+
+      font-size:
+
+        clamp(15px,1.6vw,28px);
+
+
+
+      font-weight:700;
+
+
+
+      letter-spacing:2px;
+
+    }
+
+
+
+    .titulo-grande{
+
+      font-family:Georgia,serif;
+
+
+
+      font-size:
+
+        clamp(30px,3.6vw,65px);
+
+
+
+      font-weight:900;
+
+
+
+      line-height:.86;
+
+
+
+      text-shadow:
+
+        0 4px 2px #000,
+
+        0 0 20px rgba(255,0,0,.7);
+
+    }
+
+
+
+    .vermelho{
+
+      color:#e31b23;
+
+    }
+
+
+
+    .periodo{
+
+      margin-top:
+
+        clamp(2px,.5vh,7px);
+
+
+
+      font-size:
+
+        clamp(10px,1vw,18px);
+
+
+
+      font-weight:bold;
+
+
+
+      letter-spacing:1.5px;
+
+    }
+
+
+
+    /* =====================================================
+
+       RELÓGIO
+
+    ===================================================== */
+
+
+
+    .relogio{
+
+      position:absolute;
+
+
+
+      right:0;
+
+      top:50%;
+
+
+
+      transform:translateY(-50%);
+
+
+
+      background:
+
+        rgba(7,15,22,.90);
+
+
+
+      border:
+
+        1px solid #789;
+
+
+
+      border-radius:12px;
+
+
+
+      padding:
+
+        7px 14px;
+
+
+
+      min-width:145px;
+
+
+
+      font-size:
+
+        clamp(17px,1.5vw,26px);
+
+
+
+      font-weight:bold;
+
+    }
+
+
+
+    .relogio small{
+
+      display:block;
+
+
+
+      margin-top:2px;
+
+
+
+      font-size:
+
+        clamp(7px,.55vw,10px);
+
+
+
+      opacity:.7;
+
+    }
+
+
+
+    /* =====================================================
+
+       CONTAGEM
+
+    ===================================================== */
+
+
+
+    .contagem{
+
+      display:grid;
+
+
+
+      grid-template-columns:
+
+        minmax(210px,1.5fr)
+
+        repeat(7,1fr);
+
+
+
+      gap:
+
+        clamp(3px,.4vw,7px);
+
+
+
+      padding:
+
+        clamp(4px,.5vh,7px);
+
+
+
+      background:
+
+        rgba(5,9,14,.88);
+
+
+
+      border:
+
+        1px solid #b51c22;
+
+
+
+      border-radius:13px;
+
+    }
+
+
+
+    .faltam{
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+
+
+      gap:10px;
+
+
+
+      font-weight:bold;
+
+    }
+
+
+
+    .numero{
+
+      font-size:
+
+        clamp(25px,2.7vw,48px);
+
+
+
+      color:#fff;
+
+
+
+      text-shadow:
+
+        0 0 18px red;
+
+    }
+
+
+
+    .dias-label{
+
+      font-size:
+
+        clamp(12px,1.1vw,20px);
+
+    }
+
+
+
+    .dia{
+
+      display:flex;
+
+
+
+      flex-direction:column;
+
+
+
+      align-items:center;
+
+      justify-content:center;
+
+
+
+      text-align:center;
+
+
+
+      padding:
+
+        clamp(3px,.5vh,8px)
+
+        2px;
+
+
+
+      border:
+
+        1px solid #46515d;
+
+
+
+      border-radius:9px;
+
+
+
+      background:
+
+        rgba(7,16,24,.92);
+
+
+
+      font-size:
+
+        clamp(10px,.85vw,15px);
+
+    }
+
+
+
+    .dia strong{
+
+      display:block;
+
+
+
+      font-size:
+
+        clamp(13px,1.2vw,21px);
+
+
+
+      margin-bottom:2px;
+
+    }
+
+
+
+    .dia.ativo{
+
+      background:
+
+        linear-gradient(
+
+          180deg,
+
+          #c20d18,
+
+          #69020a
+
+        );
+
+
+
+      border-color:#ff3843;
+
+
+
+      box-shadow:
+
+        0 0 18px rgba(255,0,0,.5);
+
+    }
+
+
+
+    /* =====================================================
+
+       ÁREA PRINCIPAL
+
+    ===================================================== */
+
+
+
+    .grid{
+
+      min-height:0;
+
+
+
+      display:grid;
+
+
+
+      grid-template-columns:
+
+        minmax(330px,1.10fr)
+
+        minmax(0,1.45fr)
+
+        minmax(0,1.45fr);
+
+
+
+      gap:
+
+        clamp(6px,.8vw,14px);
+
+
+
+      overflow:hidden;
+
+    }
+
+
+
+    .card{
+
+      min-height:0;
+
+
+
+      display:flex;
+
+      flex-direction:column;
+
+
+
+      overflow:hidden;
+
+
+
+      border-radius:13px;
+
+
+
+      background:
+
+        rgba(3,12,20,.88);
+
+
+
+      border:
+
+        1px solid #36414b;
+
+
+
+      box-shadow:
+
+        0 8px 25px rgba(0,0,0,.35);
+
+    }
+
+
+
+    .card-title{
+
+      flex:none;
+
+
+
+      padding:
+
+        clamp(5px,.7vh,10px)
+
+        10px;
+
+
+
+      font-size:
+
+        clamp(14px,1.25vw,22px);
+
+
+
+      font-weight:bold;
+
+
+
+      text-align:center;
+
+
+
+      background:
+
+        linear-gradient(
+
+          180deg,
+
+          rgba(156,11,19,.96),
+
+          rgba(84,0,6,.96)
+
+        );
+
+    }
+
+
+
+    .card.blue .card-title{
+
+      background:
+
+        linear-gradient(
+
+          180deg,
+
+          rgba(6,79,122,.96),
+
+          rgba(1,37,59,.96)
+
+        );
+
+    }
+
+
+
+    .card.gold .card-title{
+
+      background:
+
+        linear-gradient(
+
+          180deg,
+
+          rgba(138,88,0,.96),
+
+          rgba(64,41,0,.96)
+
+        );
+
+    }
+
+
+
+    /* =====================================================
+
+       QR CODE
+
+    ===================================================== */
+
+
+
+    .qr-area{
+
+      flex:1;
+
+
+
+      min-height:0;
+
+
+
+      padding:
+
+        clamp(3px,.5vh,7px);
+
+
+
+      display:flex;
+
+
+
+      flex-direction:column;
+
+
+
+      justify-content:center;
+
+      align-items:center;
+
+
+
+      text-align:center;
+
+
+
+      overflow:hidden;
+
+    }
+
+
+
+    #qrcode{
+
+      background:#fff;
+
+
+
+      padding:10px;
+
+
+
+      border-radius:16px;
+
+
+
+      width:min(34vh,340px);
+
+      height:min(34vh,340px);
+
+
+
+      min-width:230px;
+
+      min-height:230px;
+
+
+
+      display:flex;
+
+
+
+      justify-content:center;
+
+      align-items:center;
+
+
+
+      box-shadow:
+
+        0 0 30px rgba(255,255,255,.22),
+
+        0 0 45px rgba(200,0,0,.30);
+
+    }
+
+
+
+    #qrcode img,
+
+    #qrcode canvas{
+
+      width:100%!important;
+
+      height:100%!important;
+
+    }
+
+
+
+    .qr-text{
+
+      margin-top:
+
+        clamp(3px,.5vh,7px);
+
+
+
+      font-size:
+
+        clamp(10px,.85vw,15px);
+
+
+
+      font-weight:bold;
+
+
+
+      line-height:1.1;
+
+    }
+
+
+
+    .qr-frase{
+
+      margin-top:
+
+        clamp(2px,.35vh,5px);
+
+
+
+      font-size:
+
+        clamp(8px,.65vw,11px);
+
+
+
+      opacity:.7;
+
+    }
+
+
+
+    /* =====================================================
+
+       LISTAS
+
+    ===================================================== */
+
+
+
+    .lista{
+
+      flex:1;
+
+
+
+      min-height:0;
+
+
+
+      overflow:hidden;
+
+    }
+
+
+
+    .linha{
+
+      display:grid;
+
+
+
+      grid-template-columns:
+
+        minmax(55px,.5fr)
+
+        minmax(0,2.5fr)
+
+        minmax(45px,.45fr);
+
+
+
+      gap:6px;
+
+
+
+      align-items:center;
+
+
+
+      min-height:
+
+        clamp(27px,3.2vh,43px);
+
+
+
+      padding:
+
+        clamp(3px,.4vh,6px)
+
+        clamp(7px,.7vw,12px);
+
+
+
+      border-bottom:
+
+        1px solid rgba(255,255,255,.09);
+
+    }
+
+
+
+    .nome{
+
+      overflow:hidden;
+
+
+
+      white-space:nowrap;
+
+
+
+      text-overflow:ellipsis;
+
+
+
+      font-size:
+
+        clamp(11px,.95vw,17px);
+
+    }
+
+
+
+    .hora{
+
+      font-size:
+
+        clamp(9px,.75vw,13px);
+
+
+
+      opacity:.75;
+
+    }
+
+
+
+    .badge{
+
+      text-align:center;
+
+
+
+      background:#18232e;
+
+
+
+      border-radius:15px;
+
+
+
+      padding:3px;
+
+
+
+      font-size:
+
+        clamp(10px,.8vw,14px);
+
+    }
+
+
+
+    .subnome{
+
+      overflow:hidden;
+
+
+
+      white-space:nowrap;
+
+
+
+      text-overflow:ellipsis;
+
+
+
+      margin-top:1px;
+
+
+
+      font-size:
+
+        clamp(8px,.6vw,10px);
+
+
+
+      opacity:.55;
+
+    }
+
+
+
+    .pagina-lista{
+
+      text-align:center;
+
+
+
+      padding:3px 5px;
+
+
+
+      font-size:
+
+        clamp(8px,.6vw,10px);
+
+
+
+      color:#8f9ca6;
+
+
+
+      opacity:.8;
+
+
+
+      background:
+
+        rgba(0,0,0,.15);
+
+    }
+
+
+
+    /* =====================================================
+
+       TOTAIS
+
+    ===================================================== */
+
+
+
+    .totais{
+
+      display:grid;
+
+
+
+      grid-template-columns:
+
+        repeat(3,1fr);
+
+
+
+      gap:
+
+        clamp(6px,.8vw,14px);
+
+    }
+
+
+
+    .total{
+
+      min-height:0;
+
+
+
+      padding:
+
+        clamp(4px,.6vh,8px);
+
+
+
+      border-radius:10px;
+
+
+
+      text-align:center;
+
+
+
+      background:
+
+        rgba(8,18,27,.91);
+
+
+
+      border:
+
+        1px solid #33414e;
+
+    }
+
+
+
+    .total span{
+
+      font-size:
+
+        clamp(9px,.8vw,14px);
+
+
+
+      font-weight:bold;
+
+    }
+
+
+
+    .total strong{
+
+      display:block;
+
+
+
+      margin-top:0;
+
+
+
+      font-size:
+
+        clamp(22px,2.2vw,38px);
+
+
+
+      line-height:1;
+
+    }
+
+
+
+    .total.red{
+
+      border-color:#d4141e;
+
+    }
+
+
+
+    .total.blue{
+
+      border-color:#0876ac;
+
+    }
+
+
+
+    .total.green{
+
+      border-color:#159447;
+
+    }
+
+
+
+    /* =====================================================
+
+       RODAPÉ
+
+    ===================================================== */
+
+
+
+    .rodape{
+
+      display:flex;
+
+
+
+      justify-content:space-between;
+
+      align-items:center;
+
+
+
+      gap:10px;
+
+
+
+      padding:
+
+        clamp(3px,.4vh,6px)
+
+        12px;
+
+
+
+      border-radius:8px;
+
+
+
+      background:
+
+        rgba(0,0,0,.55);
+
+
+
+      color:#bbc5ce;
+
+
+
+      font-size:
+
+        clamp(9px,.7vw,12px);
+
+    }
+
+
+
+    /* =====================================================
+
+       TELÃO MENOR
+
+    ===================================================== */
+
+
+
+    @media(max-height:750px){
+
+
+
+      .titulo-pequeno{
+
+        font-size:15px;
+
+      }
+
+
+
+      .titulo-grande{
+
+        font-size:32px;
+
+      }
+
+
+
+      .periodo{
+
+        font-size:10px;
+
+      }
+
+
+
+      #qrcode{
+
+        width:240px;
+
+        height:240px;
+
+
+
+        min-width:240px;
+
+        min-height:240px;
+
+      }
+
+
+
+      .linha{
+
+        min-height:25px;
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+
+       CELULAR
+
+    ===================================================== */
+
+
+
+    @media(max-width:800px){
+
+
+
+      html,
+
+      body{
+
+        height:auto;
+
+        overflow:auto;
+
+      }
+
+
+
+      .app{
+
+        height:auto;
+
+        min-height:100vh;
+
+        display:block;
+
+      }
+
+
+
+      .header{
+
+        padding:15px 5px;
+
+      }
+
+
+
+      .relogio{
+
+        position:relative;
+
+
+
+        right:auto;
+
+        top:auto;
+
+
+
+        transform:none;
+
+
+
+        display:inline-block;
+
+
+
+        margin-top:10px;
+
+      }
+
+
+
+      .contagem{
+
+        margin-top:10px;
+
+
+
+        grid-template-columns:
+
+          repeat(2,1fr);
+
+      }
+
+
+
+      .faltam{
+
+        grid-column:1 / -1;
+
+
+
+        padding:10px;
+
+      }
+
+
+
+      .grid{
+
+        display:grid;
+
+
+
+        grid-template-columns:1fr;
+
+
+
+        margin-top:10px;
+
+      }
+
+
+
+      .card{
+
+        min-height:350px;
+
+
+
+        margin-bottom:10px;
+
+      }
+
+
+
+      .lista{
+
+        overflow:auto;
+
+      }
+
+
+
+      #qrcode{
+
+        width:280px;
+
+        height:280px;
+
+
+
+        min-width:280px;
+
+        min-height:280px;
+
+      }
+
+
+
+      .totais{
+
+        margin-top:10px;
+
+
+
+        grid-template-columns:1fr;
+
+      }
+
+
+
+      .rodape{
+
+        margin-top:10px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+
+<body>
+
+
+
+  <div class="app">
+
+
+
+    <!-- CABEÇALHO -->
+
+
+
+    <div class="header">
+
+
+
+      <div>
+
+
+
+        <div class="titulo-pequeno">
+
+          SEMANA DE
+
+        </div>
+
+
+
+        <div class="titulo-grande">
+
+          LIBERTAÇÃO
+
+          <span class="vermelho">&</span>
+
+          BATALHA
+
+          <br>
+
+          ESPIRITUAL
+
+        </div>
+
+
+
+        <div class="periodo">
+
+          📅 DE 26 DE OUTUBRO A 1º DE NOVEMBRO
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <div class="relogio">
+
+
+
+        <div id="relogio">
+
+          --:--:--
+
+        </div>
+
+
+
+        <small>
+
+          ATUALIZAÇÃO AUTOMÁTICA
+
+        </small>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- CONTAGEM -->
+
+
+
+    <div class="contagem">
+
+
+
+      <div class="faltam">
+
+
+
+        <div
+
+          style="font-size:clamp(25px,2.5vw,43px);"
+
+        >
+
+          ⏱
+
+        </div>
+
+
+
+        <div>
+
+
+
+          <div
+
+            id="textoContagem"
+
+            class="dias-label"
+
+          >
+
+            FALTAM
+
+          </div>
+
+
+
+          <div>
+
+
+
+            <span
+
+              id="numeroContagem"
+
+              class="numero"
+
+            >
+
+              --
+
+            </span>
+
+
+
+            <span id="tipoContagem">
+
+              DIAS
+
+            </span>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <div class="dia" id="dia1">
+
+        <strong>1º DIA</strong>
+
+        26/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia2">
+
+        <strong>2º DIA</strong>
+
+        27/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia3">
+
+        <strong>3º DIA</strong>
+
+        28/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia4">
+
+        <strong>4º DIA</strong>
+
+        29/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia5">
+
+        <strong>5º DIA</strong>
+
+        30/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia6">
+
+        <strong>6º DIA</strong>
+
+        31/10
+
+      </div>
+
+
+
+      <div class="dia" id="dia7">
+
+        <strong>7º DIA</strong>
+
+        01/11
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- CONTEÚDO -->
+
+
+
+    <div class="grid">
+
+
+
+      <!-- QR CODE -->
+
+
+
+      <div class="card">
+
+
+
+        <div class="card-title">
+
+          🛡️ ALISTAMENTO
+
+        </div>
+
+
+
+        <div class="qr-area">
+
+
+
+          <div id="qrcode"></div>
+
+
+
+          <div class="qr-text">
+
+            ESCANEIE O QR CODE
+
+            <br>
+
+            E FAÇA SEU ALISTAMENTO
+
+          </div>
+
+
+
+          <div class="qr-frase">
+
+            ⚔️ VENHA FAZER PARTE
+
+            <br>
+
+            DESTA BATALHA
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <!-- ALISTADOS -->
+
+
+
+      <div class="card gold">
+
+
+
+        <div class="card-title">
+
+          🛡️ ÚLTIMOS ALISTADOS
+
+        </div>
+
+
+
+        <div
+
+          id="listaAlistados"
+
+          class="lista"
+
+        >
+
+
+
+          <div
+
+            style="
+
+              padding:20px;
+
+              text-align:center;
+
+              opacity:.6;
+
+            "
+
+          >
+
+            Carregando...
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <!-- CONVIDADOS -->
+
+
+
+      <div class="card blue">
+
+
+
+        <div class="card-title">
+
+          👥 CONVIDADOS
+
+        </div>
+
+
+
+        <div
+
+          id="listaConvidados"
+
+          class="lista"
+
+        >
+
+
+
+          <div
+
+            style="
+
+              padding:20px;
+
+              text-align:center;
+
+              opacity:.6;
+
+            "
+
+          >
+
+            Carregando...
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- TOTAIS -->
+
+
+
+    <div class="totais">
+
+
+
+      <div class="total red">
+
+
+
+        <span>
+
+          🛡️ TOTAL DE ALISTADOS
+
+        </span>
+
+
+
+        <strong id="totalAlistados">
+
+          0
+
+        </strong>
+
+
+
+      </div>
+
+
+
+      <div class="total blue">
+
+
+
+        <span>
+
+          👥 TOTAL DE CONVIDADOS
+
+        </span>
+
+
+
+        <strong id="totalConvidados">
+
+          0
+
+        </strong>
+
+
+
+      </div>
+
+
+
+      <div class="total green">
+
+
+
+        <span>
+
+          👥 TOTAL GERAL
+
+        </span>
+
+
+
+        <strong id="totalGeral">
+
+          0
+
+        </strong>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- RODAPÉ -->
+
+
+
+    <div class="rodape">
+
+
+
+      <div>
+
+        🔄 Dados atualizados a cada
+
+        <strong>60 segundos</strong>
+
+        • nomes alternam automaticamente
+
+      </div>
+
+
+
+      <div>
+
+        Última atualização:
+
+        <strong id="ultimaAtualizacao">
+
+          --
+
+        </strong>
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- QR CODE -->
+
+
+
+  <script
+
+    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+
+  </script>
+
+
+
+  <script>
+
+
+
+    /* =====================================================
+
+       CONFIGURAÇÃO
+
+    ===================================================== */
+
+
+
+    const ITENS_POR_PAGINA = 10;
+
+
+
+    const TEMPO_ROTACAO = 15000;
+
+    const APPS_SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycbwCysiEwkxKBdQwSUKo_0_w5sSOXwq9xFw8ka08dTgWrVwU0-5ebyJOm09pHFVaV7vM/exec';
+
+    const API_PAINEL = APPS_SCRIPT_URL + '?api=painel';
+    const URL_ALISTAMENTO = APPS_SCRIPT_URL + '?p=alistamento';
+
+
+
+    let todosAlistados = [];
+
+    let todosConvidados = [];
+
+
+
+    let paginaAlistados = 0;
+
+    let paginaConvidados = 0;
+
+
+
+    /* =====================================================
+
+       RELÓGIO
+
+    ===================================================== */
+
+
+
+    function atualizarRelogio(){
+
+
+
+      const agora = new Date();
+
+
+
+      document.getElementById(
+
+        'relogio'
+
+      ).textContent =
+
+        agora.toLocaleTimeString('pt-BR');
+
+
+
+    }
+
+
+
+    atualizarRelogio();
+
+
+
+    setInterval(
+
+      atualizarRelogio,
+
+      1000
+
+    );
+
+
+
+    /* =====================================================
+
+       CONTAGEM REGRESSIVA
+
+    ===================================================== */
+
+
+
+    function atualizarContagem(){
+
+
+
+      const agora = new Date();
+
+
+
+      const inicio =
+
+        new Date(
+
+          2026,
+
+          9,
+
+          26,
+
+          0,
+
+          0,
+
+          0
+
+        );
+
+
+
+      const fim =
+
+        new Date(
+
+          2026,
+
+          10,
+
+          1,
+
+          23,
+
+          59,
+
+          59
+
+        );
+
+
+
+      document
+
+        .querySelectorAll('.dia')
+
+        .forEach(function(el){
+
+
+
+          el.classList.remove(
+
+            'ativo'
+
+          );
+
+
+
+        });
+
+
+
+      /* ANTES DO EVENTO */
+
+
+
+      if(agora < inicio){
+
+
+
+        const hoje =
+
+          new Date(
+
+            agora.getFullYear(),
+
+            agora.getMonth(),
+
+            agora.getDate()
+
+          );
+
+
+
+        const alvo =
+
+          new Date(
+
+            2026,
+
+            9,
+
+            26
+
+          );
+
+
+
+        const diferenca =
+
+          Math.ceil(
+
+            (alvo - hoje) /
+
+            86400000
+
+          );
+
+
+
+        document.getElementById(
+
+          'textoContagem'
+
+        ).textContent =
+
+          'FALTAM';
+
+
+
+        document.getElementById(
+
+          'numeroContagem'
+
+        ).textContent =
+
+          diferenca;
+
+
+
+        document.getElementById(
+
+          'tipoContagem'
+
+        ).textContent =
+
+          diferenca === 1
+
+            ? 'DIA'
+
+            : 'DIAS';
+
+
+
+        return;
+
+      }
+
+
+
+      /* DURANTE O EVENTO */
+
+
+
+      if(agora <= fim){
+
+
+
+        const hoje =
+
+          new Date(
+
+            agora.getFullYear(),
+
+            agora.getMonth(),
+
+            agora.getDate()
+
+          );
+
+
+
+        const primeiro =
+
+          new Date(
+
+            2026,
+
+            9,
+
+            26
+
+          );
+
+
+
+        let numeroDia =
+
+          Math.floor(
+
+            (hoje - primeiro) /
+
+            86400000
+
+          ) + 1;
+
+
+
+        numeroDia =
+
+          Math.min(
+
+            7,
+
+            Math.max(
+
+              1,
+
+              numeroDia
+
+            )
+
+          );
+
+
+
+        document.getElementById(
+
+          'textoContagem'
+
+        ).textContent =
+
+          'ESTAMOS NO';
+
+
+
+        document.getElementById(
+
+          'numeroContagem'
+
+        ).textContent =
+
+          numeroDia + 'º';
+
+
+
+        document.getElementById(
+
+          'tipoContagem'
+
+        ).textContent =
+
+          'DIA';
+
+
+
+        const elemento =
+
+          document.getElementById(
+
+            'dia' + numeroDia
+
+          );
+
+
+
+        if(elemento){
+
+
+
+          elemento.classList.add(
+
+            'ativo'
+
+          );
+
+
+
+        }
+
+
+
+        return;
+
+      }
+
+
+
+      /* EVENTO CONCLUÍDO */
+
+
+
+      document.getElementById(
+
+        'textoContagem'
+
+      ).textContent =
+
+        'CAMPANHA';
+
+
+
+      document.getElementById(
+
+        'numeroContagem'
+
+      ).textContent =
+
+        '7';
+
+
+
+      document.getElementById(
+
+        'tipoContagem'
+
+      ).textContent =
+
+        'DIAS CONCLUÍDOS';
+
+    }
+
+
+
+    atualizarContagem();
+
+
+
+    setInterval(
+
+      atualizarContagem,
+
+      60000
+
+    );
+
+
+
+    /* =====================================================
+
+       SEGURANÇA DO TEXTO
+
+    ===================================================== */
+
+
+
+    function escapar(texto){
+
+
+
+      const div =
+
+        document.createElement(
+
+          'div'
+
+        );
+
+
+
+      div.textContent =
+
+        texto || '';
+
+
+
+      return div.innerHTML;
+
+    }
+
+
+
+    /* =====================================================
+
+       CARREGAR DADOS DO GOOGLE APPS SCRIPT
+
+    ===================================================== */
+
+
+
+    async function carregarPainel(){
+
+      try{
+        const resposta = await fetch(
+          API_PAINEL + '&t=' + Date.now(),
+          { cache:'no-store' }
+        );
+
+        if(!resposta.ok){
+          throw new Error('HTTP ' + resposta.status);
+        }
+
+        const dados = await resposta.json();
+        atualizarPainel(dados);
+
+      }catch(erro){
+        console.error('Erro ao carregar painel:', erro);
+      }
+    }
+
+
+    /* =====================================================
+
+       ATUALIZAR PAINEL
+
+    ===================================================== */
+
+
+
+    function atualizarPainel(dados){
+
+
+
+      if(!dados){
+
+        return;
+
+      }
+
+
+
+      document.getElementById(
+
+        'totalAlistados'
+
+      ).textContent =
+
+        dados.totalAlistados || 0;
+
+
+
+      document.getElementById(
+
+        'totalConvidados'
+
+      ).textContent =
+
+        dados.totalConvidados || 0;
+
+
+
+      document.getElementById(
+
+        'totalGeral'
+
+      ).textContent =
+
+        dados.totalGeral || 0;
+
+
+
+      document.getElementById(
+
+        'ultimaAtualizacao'
+
+      ).textContent =
+
+        dados.atualizadoEm || '--';
+
+
+
+      todosAlistados =
+
+        Array.isArray(
+
+          dados.alistados
+
+        )
+
+          ? dados.alistados
+
+          : [];
+
+
+
+      todosConvidados =
+
+        Array.isArray(
+
+          dados.convidados
+
+        )
+
+          ? dados.convidados
+
+          : [];
+
+
+
+      paginaAlistados = 0;
+
+      paginaConvidados = 0;
+
+
+
+      mostrarPaginaAlistados();
+
+      mostrarPaginaConvidados();
+
+    }
+
+
+
+    /* =====================================================
+
+       ALISTADOS
+
+    ===================================================== */
+
+
+
+    function mostrarPaginaAlistados(){
+
+
+
+      const elemento =
+
+        document.getElementById(
+
+          'listaAlistados'
+
+        );
+
+
+
+      if(
+
+        todosAlistados.length === 0
+
+      ){
+
+
+
+        elemento.innerHTML = \`
+
+          <div style="
+
+            padding:20px;
+
+            text-align:center;
+
+            opacity:.6;
+
+          ">
+
+            Nenhum alistamento ainda.
+
+          </div>
+
+        \`;
+
+
+
+        return;
+
+      }
+
+
+
+      const totalPaginas =
+
+        Math.ceil(
+
+          todosAlistados.length /
+
+          ITENS_POR_PAGINA
+
+        );
+
+
+
+      if(
+
+        paginaAlistados >=
+
+        totalPaginas
+
+      ){
+
+        paginaAlistados = 0;
+
+      }
+
+
+
+      const inicio =
+
+        paginaAlistados *
+
+        ITENS_POR_PAGINA;
+
+
+
+      const fim =
+
+        inicio +
+
+        ITENS_POR_PAGINA;
+
+
+
+      const itens =
+
+        todosAlistados.slice(
+
+          inicio,
+
+          fim
+
+        );
+
+
+
+      let html = '';
+
+
+
+      itens.forEach(
+
+        function(item){
+
+
+
+          html += \`
+
+            <div class="linha">
+
+
+
+              <div class="hora">
+
+                ${escapar(item.hora)}
+
+              </div>
+
+
+
+              <div class="nome">
+
+                🛡️
+
+                ${escapar(item.nome)}
+
+              </div>
+
+
+
+              <div class="badge">
+
+                +${Number(
+
+                  item.quantidade || 0
+
+                )}
+
+              </div>
+
+
+
+            </div>
+
+          \`;
+
+
+
+        }
+
+      );
+
+
+
+      if(totalPaginas > 1){
+
+
+
+        html += \`
+
+          <div class="pagina-lista">
+
+            ${paginaAlistados + 1}
+
+            /
+
+            ${totalPaginas}
+
+            • próximos nomes em 15s
+
+          </div>
+
+        \`;
+
+      }
+
+
+
+      elemento.innerHTML =
+
+        html;
+
+    }
+
+
+
+    /* =====================================================
+
+       CONVIDADOS
+
+    ===================================================== */
+
+
+
+    function mostrarPaginaConvidados(){
+
+
+
+      const elemento =
+
+        document.getElementById(
+
+          'listaConvidados'
+
+        );
+
+
+
+      if(
+
+        todosConvidados.length === 0
+
+      ){
+
+
+
+        elemento.innerHTML = \`
+
+          <div style="
+
+            padding:20px;
+
+            text-align:center;
+
+            opacity:.6;
+
+          ">
+
+            Nenhum convidado ainda.
+
+          </div>
+
+        \`;
+
+
+
+        return;
+
+      }
+
+
+
+      const totalPaginas =
+
+        Math.ceil(
+
+          todosConvidados.length /
+
+          ITENS_POR_PAGINA
+
+        );
+
+
+
+      if(
+
+        paginaConvidados >=
+
+        totalPaginas
+
+      ){
+
+        paginaConvidados = 0;
+
+      }
+
+
+
+      const inicio =
+
+        paginaConvidados *
+
+        ITENS_POR_PAGINA;
+
+
+
+      const fim =
+
+        inicio +
+
+        ITENS_POR_PAGINA;
+
+
+
+      const itens =
+
+        todosConvidados.slice(
+
+          inicio,
+
+          fim
+
+        );
+
+
+
+      let html = '';
+
+
+
+      itens.forEach(
+
+        function(item){
+
+
+
+          html += \`
+
+            <div class="linha">
+
+
+
+              <div class="hora">
+
+                ${escapar(item.hora)}
+
+              </div>
+
+
+
+              <div>
+
+
+
+                <div class="nome">
+
+                  👤
+
+                  ${escapar(item.nome)}
+
+                </div>
+
+
+
+                <div class="subnome">
+
+                  Alistado por
+
+                  ${escapar(
+
+                    item.alistadoPor
+
+                  )}
+
+                </div>
+
+
+
+              </div>
+
+
+
+              <div></div>
+
+
+
+            </div>
+
+          \`;
+
+
+
+        }
+
+      );
+
+
+
+      if(totalPaginas > 1){
+
+
+
+        html += \`
+
+          <div class="pagina-lista">
+
+            ${paginaConvidados + 1}
+
+            /
+
+            ${totalPaginas}
+
+            • próximos nomes em 15s
+
+          </div>
+
+        \`;
+
+      }
+
+
+
+      elemento.innerHTML =
+
+        html;
+
+    }
+
+
+
+    /* =====================================================
+
+       ROTAÇÃO AUTOMÁTICA
+
+    ===================================================== */
+
+
+
+    function girarListas(){
+
+
+
+      if(
+
+        todosAlistados.length >
+
+        ITENS_POR_PAGINA
+
+      ){
+
+
+
+        const totalPaginas =
+
+          Math.ceil(
+
+            todosAlistados.length /
+
+            ITENS_POR_PAGINA
+
+          );
+
+
+
+        paginaAlistados =
+
+          (
+
+            paginaAlistados + 1
+
+          ) %
+
+          totalPaginas;
+
+
+
+        mostrarPaginaAlistados();
+
+      }
+
+
+
+      if(
+
+        todosConvidados.length >
+
+        ITENS_POR_PAGINA
+
+      ){
+
+
+
+        const totalPaginas =
+
+          Math.ceil(
+
+            todosConvidados.length /
+
+            ITENS_POR_PAGINA
+
+          );
+
+
+
+        paginaConvidados =
+
+          (
+
+            paginaConvidados + 1
+
+          ) %
+
+          totalPaginas;
+
+
+
+        mostrarPaginaConvidados();
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+
+       GERAR QR CODE
+
+    ===================================================== */
+
+
+
+    const elementoQr = document.getElementById('qrcode');
+    elementoQr.innerHTML = '';
+
+    new QRCode(
+      elementoQr,
+      {
+        text: URL_ALISTAMENTO,
+        width:400,
+        height:400,
+        colorDark:'#000000',
+        colorLight:'#ffffff',
+        correctLevel:QRCode.CorrectLevel.H
+      }
+    );
+
+
+    /* =====================================================
+
+       INICIAR PAINEL
+
+    ===================================================== */
+
+
+
+    carregarPainel();
+
+
+
+    /* nomes a cada 15 segundos */
+
+
+
+    setInterval(
+
+      girarListas,
+
+      TEMPO_ROTACAO
+
+    );
+
+
+
+    /* dados a cada 60 segundos */
+
+
+
+    setInterval(
+
+      carregarPainel,
+
+      60000
+
+    );
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>
