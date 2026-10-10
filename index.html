@@ -2530,24 +2530,64 @@
 
 
 
-    async function carregarPainel(){
+    function carregarPainel(){
 
-      try{
-        const resposta = await fetch(
-          API_PAINEL + '&t=' + Date.now(),
-          { cache:'no-store' }
-        );
+      const callback =
+        '__painelCallback_' +
+        Date.now() +
+        '_' +
+        Math.floor(Math.random() * 100000);
 
-        if(!resposta.ok){
-          throw new Error('HTTP ' + resposta.status);
+      const script = document.createElement('script');
+      let terminou = false;
+
+      const limpar = function(){
+        if(terminou) return;
+        terminou = true;
+
+        try{
+          delete window[callback];
+        }catch(e){
+          window[callback] = undefined;
         }
 
-        const dados = await resposta.json();
-        atualizarPainel(dados);
+        if(script.parentNode){
+          script.parentNode.removeChild(script);
+        }
+      };
 
-      }catch(erro){
-        console.error('Erro ao carregar painel:', erro);
-      }
+      const timeout = setTimeout(function(){
+        if(terminou) return;
+        console.error('Tempo esgotado ao carregar dados do painel.');
+        limpar();
+      }, 15000);
+
+      window[callback] = function(dados){
+        clearTimeout(timeout);
+
+        try{
+          atualizarPainel(dados);
+        }catch(erro){
+          console.error('Erro ao atualizar painel:', erro);
+        }finally{
+          limpar();
+        }
+      };
+
+      script.onerror = function(){
+        clearTimeout(timeout);
+        console.error('Erro ao comunicar com o Google Apps Script.');
+        limpar();
+      };
+
+      script.src =
+        API_PAINEL +
+        '&callback=' +
+        encodeURIComponent(callback) +
+        '&t=' +
+        Date.now();
+
+      document.head.appendChild(script);
     }
 
 
