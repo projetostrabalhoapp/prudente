@@ -2530,36 +2530,54 @@
 
 
 
-    function receberDadosPainel(dados){
-      atualizarPainel(dados);
+    let bridgeFrame = null;
+    let bridgePronto = false;
+
+    function criarBridge(){
+      if(bridgeFrame) return;
+
+      bridgeFrame = document.createElement('iframe');
+      bridgeFrame.id = 'appsScriptBridge';
+      bridgeFrame.src = APPS_SCRIPT_URL + '?p=bridge&t=' + Date.now();
+      bridgeFrame.style.display = 'none';
+      bridgeFrame.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(bridgeFrame);
     }
 
-    function carregarPainel(){
-
-      const antigo =
-        document.getElementById('apiPainelScript');
-
-      if(antigo){
-        antigo.remove();
+    window.addEventListener('message', function(event){
+      if(!bridgeFrame || event.source !== bridgeFrame.contentWindow){
+        return;
       }
 
-      const script =
-        document.createElement('script');
+      const msg = event.data || {};
 
-      script.id = 'apiPainelScript';
+      if(msg.tipo === 'PAINEL_BRIDGE_PRONTO'){
+        bridgePronto = true;
+        carregarPainel();
+        return;
+      }
 
-      script.src =
-        APPS_SCRIPT_URL +
-        '?api=painel' +
-        '&callback=receberDadosPainel' +
-        '&t=' +
-        Date.now();
+      if(msg.tipo === 'PAINEL_DADOS'){
+        atualizarPainel(msg.dados);
+        return;
+      }
 
-      script.onerror = function(){
-        console.error('Erro ao carregar os dados do painel.');
-      };
+      if(msg.tipo === 'PAINEL_ERRO'){
+        console.error('Erro ao carregar os dados do painel:', msg.erro);
+      }
+    });
 
-      document.body.appendChild(script);
+    function carregarPainel(){
+      criarBridge();
+
+      if(!bridgePronto || !bridgeFrame || !bridgeFrame.contentWindow){
+        return;
+      }
+
+      bridgeFrame.contentWindow.postMessage(
+        { tipo:'CARREGAR_PAINEL' },
+        '*'
+      );
     }
 
 
