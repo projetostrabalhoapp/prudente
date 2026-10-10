@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Alistamento</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+
+  margin:0;
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:white;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      #5c0b0b,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      #07324a,
+      transparent 40%
+    ),
+    #05090d;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+}
+
+
+.container{
+
+  width:100%;
+  max-width:600px;
+
+  background:
+    rgba(7,14,21,.96);
+
+  border:
+    1px solid #713239;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 20px 70px
+    rgba(0,0,0,.7);
+}
+
+
+.header{
+
+  text-align:center;
+
+  padding:30px 20px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(150,0,10,.6),
+      rgba(30,0,5,.3)
+    );
+
+  border-bottom:
+    1px solid #8f242b;
+}
+
+
+.escudo{
+
+  font-size:65px;
+  margin-bottom:10px;
+}
+
+
+.header h1{
+
+  margin:0;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:30px;
+}
+
+
+.header h2{
+
+  margin:5px 0 0;
+
+  color:#e1242d;
+
+  font-size:18px;
+}
+
+
+.conteudo{
+
+  padding:25px;
+}
+
+
+label{
+
+  display:block;
+
+  margin-bottom:7px;
+
+  font-size:14px;
+
+  font-weight:bold;
+
+  color:#ccd3da;
+}
+
+
+input{
+
+  width:100%;
+
+  border:
+    1px solid #40505e;
+
+  background:#0b1620;
+
+  color:#fff;
+
+  border-radius:12px;
+
+  padding:15px;
+
+  font-size:17px;
+
+  outline:none;
+}
+
+
+input:focus{
+
+  border-color:#e3212b;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(227,33,43,.12);
+}
+
+
+.grupo{
+
+  margin-bottom:20px;
+}
+
+
+.titulo-convidados{
+
+  display:flex;
+
+  justify-content:
+    space-between;
+
+  align-items:center;
+
+  margin-top:25px;
+
+  margin-bottom:12px;
+}
+
+
+.titulo-convidados strong{
+
+  font-size:20px;
+}
+
+
+.btn-add{
+
+  border:0;
+
+  border-radius:10px;
+
+  background:#173a51;
+
+  color:white;
+
+  padding:10px 15px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+}
+
+
+.convidado{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 48px;
+
+  gap:8px;
+
+  margin-bottom:10px;
+}
+
+
+.remover{
+
+  border:0;
+
+  border-radius:10px;
+
+  background:#4c0d12;
+
+  color:white;
+
+  font-size:20px;
+
+  cursor:pointer;
+}
+
+
+.salvar{
+
+  width:100%;
+
+  margin-top:25px;
+
+  padding:18px;
+
+  border:0;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      180deg,
+      #df1722,
+      #82040b
+    );
+
+  box-shadow:
+    0 10px 30px
+    rgba(200,0,10,.25);
+}
+
+
+.salvar:disabled{
+
+  opacity:.5;
+
+  cursor:not-allowed;
+}
+
+
+.mensagem{
+
+  display:none;
+
+  margin-top:20px;
+
+  padding:20px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  font-weight:bold;
+}
+
+
+.sucesso{
+
+  display:block;
+
+  background:
+    rgba(0,130,65,.18);
+
+  border:
+    1px solid #138e50;
+
+  color:#79e5aa;
+}
+
+
+.erro{
+
+  display:block;
+
+  background:
+    rgba(200,20,30,.15);
+
+  border:
+    1px solid #b32a32;
+
+  color:#ff8f96;
+}
+
+
+.resumo{
+
+  text-align:center;
+
+  padding:15px;
+
+  font-size:13px;
+
+  color:#84909a;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.07);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<div class="header">
+
+  <div class="escudo">
+    🛡️⚔️
+  </div>
+
+  <h1>
+    ALISTAMENTO
+  </h1>
+
+  <h2>
+    SEMANA DE LIBERTAÇÃO
+    <br>
+    & BATALHA ESPIRITUAL
+  </h2>
+
+</div>
+
+
+<div class="conteudo">
+
+
+<div class="grupo">
+
+  <label>
+    SEU NOME
+  </label>
+
+  <input
+    id="nome"
+    type="text"
+    placeholder="Ex.: Maria de Fátima"
+    autocomplete="name"
+  >
+
+</div>
+
+
+<div class="titulo-convidados">
+
+  <strong>
+    👥 Convidados
+  </strong>
+
+  <button
+    class="btn-add"
+    type="button"
+    onclick="adicionarConvidado()"
+  >
+
+    + ADICIONAR
+
+  </button>
+
+</div>
+
+
+<div id="convidados"></div>
+
+
+<button
+  id="btnSalvar"
+  class="salvar"
+  type="button"
+  onclick="salvar()"
+>
+
+  🛡️ REALIZAR ALISTAMENTO
+
+</button>
+
+
+<div
+  id="mensagem"
+  class="mensagem"
+></div>
+
+
+</div>
+
+
+<div class="resumo">
+
+  📅 26 DE OUTUBRO A
+  1º DE NOVEMBRO DE 2026
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   NOVA IMPLANTAÇÃO DO APPS SCRIPT
+===================================================== */
+
+const APPS_SCRIPT_URL =
+'https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec';
+
+
+let contador = 0;
+
+let salvando = false;
+
+
+/* =====================================================
+   ADICIONAR CONVIDADO
+===================================================== */
+
+function adicionarConvidado(){
+
+  contador++;
+
+  const div =
+    document.createElement(
+      'div'
+    );
+
+  div.className =
+    'convidado';
+
+
+  div.innerHTML = `
+
+    <input
+      class="input-convidado"
+      type="text"
+      placeholder="Nome do convidado"
+    >
+
+    <button
+      class="remover"
+      type="button"
+      onclick="this.parentElement.remove()"
+    >
+
+      ×
+
+    </button>
+
+  `;
+
+
+  document
+    .getElementById(
+      'convidados'
+    )
+    .appendChild(div);
+
+}
+
+
+/* =====================================================
+   COMEÇA COM UM CONVIDADO
+===================================================== */
+
+adicionarConvidado();
+
+
+/* =====================================================
+   MENSAGEM
+===================================================== */
+
+function mostrarMensagem(
+  texto,
+  tipo
+){
+
+  const elemento =
+    document.getElementById(
+      'mensagem'
+    );
+
+
+  elemento.className =
+    'mensagem ' + tipo;
+
+
+  elemento.textContent =
+    texto;
+
+}
+
+
+/* =====================================================
+   RESULTADO DO APPS SCRIPT
+===================================================== */
+
+function receberResultadoAlistamento(
+  resultado
+){
+
+  salvando = false;
+
+
+  const botao =
+    document.getElementById(
+      'btnSalvar'
+    );
+
+
+  botao.disabled =
+    false;
+
+
+  if(
+    !resultado ||
+    resultado.ok === false
+  ){
+
+    mostrarMensagem(
+
+      resultado &&
+      resultado.erro
+        ? resultado.erro
+        : 'Erro ao realizar o alistamento.',
+
+      'erro'
+
+    );
+
+
+    botao.textContent =
+      '🛡️ REALIZAR ALISTAMENTO';
+
+
+    return;
+
+  }
+
+
+  mostrarMensagem(
+
+    '🛡️ ' +
+    resultado.nome +
+    ', alistamento realizado! ' +
+    resultado.quantidade +
+    ' convidado(s) registrado(s).',
+
+    'sucesso'
+
+  );
+
+
+  document
+    .getElementById(
+      'nome'
+    )
+    .value = '';
+
+
+  document
+    .getElementById(
+      'convidados'
+    )
+    .innerHTML = '';
+
+
+  adicionarConvidado();
+
+
+  botao.textContent =
+    '🛡️ REALIZAR NOVO ALISTAMENTO';
+
+}
+
+
+/* =====================================================
+   SALVAR
+===================================================== */
+
+function salvar(){
+
+  if(salvando){
+    return;
+  }
+
+
+  const nome =
+    document
+      .getElementById(
+        'nome'
+      )
+      .value
+      .trim();
+
+
+  const convidados =
+    Array.from(
+
+      document.querySelectorAll(
+        '.input-convidado'
+      )
+
+    )
+
+    .map(
+      function(input){
+        return input.value.trim();
+      }
+    )
+
+    .filter(Boolean);
+
+
+  if(!nome){
+
+    mostrarMensagem(
+      'Informe seu nome.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    convidados.length === 0
+  ){
+
+    mostrarMensagem(
+      'Informe pelo menos um convidado.',
+      'erro'
+    );
+
+    return;
+
+  }
+
+
+  salvando = true;
+
+
+  const botao =
+    document.getElementById(
+      'btnSalvar'
+    );
+
+
+  botao.disabled =
+    true;
+
+
+  botao.textContent =
+    '⚔️ SALVANDO ALISTAMENTO...';
+
+
+  /* REMOVE CHAMADA ANTERIOR */
+
+  const antigo =
+    document.getElementById(
+      'scriptSalvarAlistamento'
+    );
+
+
+  if(antigo){
+    antigo.remove();
+  }
+
+
+  /* MONTA A CHAMADA JSONP */
+
+  const parametros =
+    new URLSearchParams();
+
+
+  parametros.set(
+    'api',
+    'salvarAlistamento'
+  );
+
+
+  parametros.set(
+    'callback',
+    'receberResultadoAlistamento'
+  );
+
+
+  parametros.set(
+    'nome',
+    nome
+  );
+
+
+  parametros.set(
+    'convidados',
+    JSON.stringify(
+      convidados
+    )
+  );
+
+
+  parametros.set(
+    't',
+    Date.now()
+  );
+
+
+  const script =
+    document.createElement(
+      'script'
+    );
+
+
+  script.id =
+    'scriptSalvarAlistamento';
+
+
+  script.src =
+    APPS_SCRIPT_URL +
+    '?' +
+    parametros.toString();
+
+
+  script.onerror =
+    function(){
+
+      salvando = false;
+
+
+      botao.disabled =
+        false;
+
+
+      botao.textContent =
+        '🛡️ REALIZAR ALISTAMENTO';
+
+
+      mostrarMensagem(
+        'Não foi possível conectar ao sistema. Tente novamente.',
+        'erro'
+      );
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>
