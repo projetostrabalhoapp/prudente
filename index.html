@@ -2083,7 +2083,7 @@
     const TEMPO_ROTACAO = 15000;
 
     const APPS_SCRIPT_URL =
-      'https://script.google.com/macros/s/AKfycbwCysiEwkxKBdQwSUKo_0_w5sSOXwq9xFw8ka08dTgWrVwU0-5ebyJOm09pHFVaV7vM/exec';
+      'https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec';
 
     const API_PAINEL = APPS_SCRIPT_URL + '?api=painel';
     const URL_ALISTAMENTO = APPS_SCRIPT_URL + '?p=alistamento';
@@ -2530,54 +2530,36 @@
 
 
 
-    let bridgeFrame = null;
-    let bridgePronto = false;
-
-    function criarBridge(){
-      if(bridgeFrame) return;
-
-      bridgeFrame = document.createElement('iframe');
-      bridgeFrame.id = 'appsScriptBridge';
-      bridgeFrame.src = APPS_SCRIPT_URL + '?p=bridge&t=' + Date.now();
-      bridgeFrame.style.display = 'none';
-      bridgeFrame.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(bridgeFrame);
+    function receberDadosPainel(dados){
+      atualizarPainel(dados);
     }
 
-    window.addEventListener('message', function(event){
-      if(!bridgeFrame || event.source !== bridgeFrame.contentWindow){
-        return;
-      }
-
-      const msg = event.data || {};
-
-      if(msg.tipo === 'PAINEL_BRIDGE_PRONTO'){
-        bridgePronto = true;
-        carregarPainel();
-        return;
-      }
-
-      if(msg.tipo === 'PAINEL_DADOS'){
-        atualizarPainel(msg.dados);
-        return;
-      }
-
-      if(msg.tipo === 'PAINEL_ERRO'){
-        console.error('Erro ao carregar os dados do painel:', msg.erro);
-      }
-    });
-
     function carregarPainel(){
-      criarBridge();
 
-      if(!bridgePronto || !bridgeFrame || !bridgeFrame.contentWindow){
-        return;
+      const antigo =
+        document.getElementById('apiPainelScript');
+
+      if(antigo){
+        antigo.remove();
       }
 
-      bridgeFrame.contentWindow.postMessage(
-        { tipo:'CARREGAR_PAINEL' },
-        '*'
-      );
+      const script =
+        document.createElement('script');
+
+      script.id = 'apiPainelScript';
+
+      script.src =
+        APPS_SCRIPT_URL +
+        '?api=painel' +
+        '&callback=receberDadosPainel' +
+        '&t=' +
+        Date.now();
+
+      script.onerror = function(){
+        console.error('Erro ao carregar os dados do painel.');
+      };
+
+      document.body.appendChild(script);
     }
 
 
