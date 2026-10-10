@@ -2530,64 +2530,36 @@
 
 
 
+    function receberDadosPainel(dados){
+      atualizarPainel(dados);
+    }
+
     function carregarPainel(){
 
-      const callback =
-        '__painelCallback_' +
-        Date.now() +
-        '_' +
-        Math.floor(Math.random() * 100000);
+      const antigo =
+        document.getElementById('apiPainelScript');
 
-      const script = document.createElement('script');
-      let terminou = false;
+      if(antigo){
+        antigo.remove();
+      }
 
-      const limpar = function(){
-        if(terminou) return;
-        terminou = true;
+      const script =
+        document.createElement('script');
 
-        try{
-          delete window[callback];
-        }catch(e){
-          window[callback] = undefined;
-        }
-
-        if(script.parentNode){
-          script.parentNode.removeChild(script);
-        }
-      };
-
-      const timeout = setTimeout(function(){
-        if(terminou) return;
-        console.error('Tempo esgotado ao carregar dados do painel.');
-        limpar();
-      }, 15000);
-
-      window[callback] = function(dados){
-        clearTimeout(timeout);
-
-        try{
-          atualizarPainel(dados);
-        }catch(erro){
-          console.error('Erro ao atualizar painel:', erro);
-        }finally{
-          limpar();
-        }
-      };
-
-      script.onerror = function(){
-        clearTimeout(timeout);
-        console.error('Erro ao comunicar com o Google Apps Script.');
-        limpar();
-      };
+      script.id = 'apiPainelScript';
 
       script.src =
-        API_PAINEL +
-        '&callback=' +
-        encodeURIComponent(callback) +
+        APPS_SCRIPT_URL +
+        '?api=painel' +
+        '&callback=receberDadosPainel' +
         '&t=' +
         Date.now();
 
-      document.head.appendChild(script);
+      script.onerror = function(){
+        console.error('Erro ao carregar os dados do painel.');
+      };
+
+      document.body.appendChild(script);
     }
 
 
