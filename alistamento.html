@@ -6,70 +6,29 @@
 <title>Alistamento</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:white;
-  background:radial-gradient(circle at top right,#5c0b0b,transparent 40%),
-  radial-gradient(circle at bottom left,#07324a,transparent 40%),#05090d;
-  display:flex;justify-content:center;align-items:center;padding:20px
-}
-.container{
-  width:100%;max-width:600px;background:rgba(7,14,21,.96);
-  border:1px solid #713239;border-radius:25px;overflow:hidden;
-  box-shadow:0 20px 70px rgba(0,0,0,.7)
-}
-.header{
-  text-align:center;padding:30px 20px;
-  background:linear-gradient(180deg,rgba(150,0,10,.6),rgba(30,0,5,.3));
-  border-bottom:1px solid #8f242b
-}
+body{margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:#fff;background:radial-gradient(circle at top right,#5c0b0b,transparent 40%),radial-gradient(circle at bottom left,#07324a,transparent 40%),#05090d;display:flex;justify-content:center;align-items:center;padding:20px}
+.container{width:100%;max-width:600px;background:rgba(7,14,21,.96);border:1px solid #713239;border-radius:25px;overflow:hidden;box-shadow:0 20px 70px rgba(0,0,0,.7)}
+.header{text-align:center;padding:30px 20px;background:linear-gradient(180deg,rgba(150,0,10,.6),rgba(30,0,5,.3));border-bottom:1px solid #8f242b}
 .escudo{font-size:65px;margin-bottom:10px}
 .header h1{margin:0;font-family:Georgia,serif;font-size:30px}
 .header h2{margin:5px 0 0;color:#e1242d;font-size:18px}
 .conteudo{padding:25px}
 label{display:block;margin-bottom:7px;font-size:14px;font-weight:bold;color:#ccd3da}
-input{
-  width:100%;border:1px solid #40505e;background:#0b1620;color:#fff;
-  border-radius:12px;padding:15px;font-size:17px;outline:none
-}
+input{width:100%;border:1px solid #40505e;background:#0b1620;color:#fff;border-radius:12px;padding:15px;font-size:17px;outline:none}
 input:focus{border-color:#e3212b;box-shadow:0 0 0 3px rgba(227,33,43,.12)}
 .grupo{margin-bottom:20px}
-.titulo-convidados{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-top:25px;margin-bottom:12px
-}
+.titulo-convidados{display:flex;justify-content:space-between;align-items:center;margin-top:25px;margin-bottom:12px}
 .titulo-convidados strong{font-size:20px}
-.btn-add{
-  border:0;border-radius:10px;background:#173a51;color:white;
-  padding:10px 15px;cursor:pointer;font-weight:bold
-}
+.btn-add{border:0;border-radius:10px;background:#173a51;color:#fff;padding:10px 15px;cursor:pointer;font-weight:bold}
 .convidado{display:grid;grid-template-columns:1fr 48px;gap:8px;margin-bottom:10px}
-.remover{
-  border:0;border-radius:10px;background:#4c0d12;color:white;
-  font-size:20px;cursor:pointer
-}
-.salvar{
-  width:100%;margin-top:25px;padding:18px;border:0;border-radius:14px;
-  cursor:pointer;font-size:18px;font-weight:bold;color:white;
-  background:linear-gradient(180deg,#df1722,#82040b);
-  box-shadow:0 10px 30px rgba(200,0,10,.25)
-}
-.salvar:disabled{opacity:.5;cursor:not-allowed}
-.mensagem{
-  display:none;margin-top:20px;padding:20px;border-radius:15px;
-  text-align:center;font-weight:bold
-}
-.sucesso{
-  display:block;background:rgba(0,130,65,.18);
-  border:1px solid #138e50;color:#79e5aa
-}
-.erro{
-  display:block;background:rgba(200,20,30,.15);
-  border:1px solid #b32a32;color:#ff8f96
-}
-.resumo{
-  text-align:center;padding:15px;font-size:13px;color:#84909a;
-  border-top:1px solid rgba(255,255,255,.07)
-}
+.remover{border:0;border-radius:10px;background:#4c0d12;color:#fff;font-size:20px;cursor:pointer}
+.salvar{width:100%;margin-top:25px;padding:18px;border:0;border-radius:14px;cursor:pointer;font-size:18px;font-weight:bold;color:#fff;background:linear-gradient(180deg,#df1722,#82040b);box-shadow:0 10px 30px rgba(200,0,10,.25)}
+.salvar:disabled{opacity:.55;cursor:not-allowed}
+.mensagem{display:none;margin-top:20px;padding:20px;border-radius:15px;text-align:center;font-weight:bold}
+.sucesso{display:block;background:rgba(0,130,65,.18);border:1px solid #138e50;color:#79e5aa}
+.erro{display:block;background:rgba(200,20,30,.15);border:1px solid #b32a32;color:#ff8f96}
+.info{display:block;background:rgba(30,100,150,.15);border:1px solid #245c82;color:#9ed7ff}
+.resumo{text-align:center;padding:15px;font-size:13px;color:#84909a;border-top:1px solid rgba(255,255,255,.07)}
 </style>
 </head>
 <body>
@@ -104,12 +63,7 @@ input:focus{border-color:#e3212b;box-shadow:0 0 0 3px rgba(227,33,43,.12)}
   <div class="resumo">📅 26 DE OUTUBRO A 1º DE NOVEMBRO DE 2026</div>
 </div>
 
-<!--
-  O formulário é enviado para um iframe invisível.
-  Assim o navegador não precisa ler uma resposta cross-origin do Apps Script.
--->
-<iframe name="destinoAppsScript" id="destinoAppsScript"
-        style="display:none;width:0;height:0;border:0"></iframe>
+<iframe name="destinoAppsScript" id="destinoAppsScript" style="display:none"></iframe>
 
 <form id="formAppsScript"
       action="https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec"
@@ -117,13 +71,18 @@ input:focus{border-color:#e3212b;box-shadow:0 0 0 3px rgba(227,33,43,.12)}
       target="destinoAppsScript"
       style="display:none">
   <input type="hidden" name="acao" value="salvar-alistamento">
+  <input type="hidden" name="requisicao_id" id="postRequisicaoId">
   <input type="hidden" name="nome" id="postNome">
   <input type="hidden" name="convidados" id="postConvidados">
 </form>
 
 <script>
+const URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec';
+
 let contador = 0;
 let salvando = false;
+let requisicaoAtual = '';
+let tentativasConfirmacao = 0;
 let timerConfirmacao = null;
 
 function adicionarConvidado(){
@@ -145,14 +104,92 @@ function mostrarMensagem(texto,tipo){
   elemento.textContent = texto;
 }
 
-function finalizarVisualmente(nome, quantidade){
+function criarId(){
+  if(window.crypto && crypto.randomUUID){
+    return crypto.randomUUID();
+  }
+  return Date.now() + '-' + Math.random().toString(36).slice(2);
+}
+
+function limparJsonp(nomeCallback, script){
+  try{ delete window[nomeCallback]; }catch(e){ window[nomeCallback] = undefined; }
+  if(script && script.parentNode) script.parentNode.removeChild(script);
+}
+
+function consultarConfirmacao(){
+  if(!salvando || !requisicaoAtual) return;
+
+  tentativasConfirmacao++;
+
+  const callback = '__confirmarAlistamento_' + Date.now() + '_' + tentativasConfirmacao;
+  const script = document.createElement('script');
+
+  window[callback] = function(resposta){
+    limparJsonp(callback, script);
+
+    if(resposta && resposta.ok === true && resposta.confirmado === true){
+      confirmarSucesso(resposta);
+      return;
+    }
+
+    agendarNovaConsulta();
+  };
+
+  script.onerror = function(){
+    limparJsonp(callback, script);
+    agendarNovaConsulta();
+  };
+
+  script.src =
+    URL_SCRIPT +
+    '?api=confirmar-alistamento' +
+    '&id=' + encodeURIComponent(requisicaoAtual) +
+    '&callback=' + encodeURIComponent(callback) +
+    '&_=' + Date.now();
+
+  document.head.appendChild(script);
+
+  setTimeout(function(){
+    if(window[callback]){
+      limparJsonp(callback, script);
+      agendarNovaConsulta();
+    }
+  }, 5000);
+}
+
+function agendarNovaConsulta(){
+  if(!salvando) return;
+
+  if(tentativasConfirmacao >= 12){
+    salvando = false;
+    requisicaoAtual = '';
+
+    const botao = document.getElementById('btnSalvar');
+    botao.disabled = false;
+    botao.textContent = '🛡️ TENTAR NOVAMENTE';
+
+    mostrarMensagem(
+      'Não foi possível confirmar a gravação. Verifique a planilha antes de tentar novamente.',
+      'erro'
+    );
+    return;
+  }
+
+  clearTimeout(timerConfirmacao);
+  timerConfirmacao = setTimeout(consultarConfirmacao, 1500);
+}
+
+function confirmarSucesso(resposta){
   salvando = false;
+  clearTimeout(timerConfirmacao);
 
   const botao = document.getElementById('btnSalvar');
 
   mostrarMensagem(
-    '🛡️ ' + nome + ', alistamento enviado! ' +
-    quantidade + ' convidado(s) registrado(s).',
+    '🛡️ ' + resposta.nome +
+    ', alistamento realizado com sucesso! ' +
+    resposta.quantidade +
+    ' convidado(s) registrado(s).',
     'sucesso'
   );
 
@@ -160,6 +197,7 @@ function finalizarVisualmente(nome, quantidade){
   document.getElementById('convidados').innerHTML = '';
   adicionarConvidado();
 
+  requisicaoAtual = '';
   botao.disabled = false;
   botao.textContent = '🛡️ REALIZAR NOVO ALISTAMENTO';
 }
@@ -186,45 +224,26 @@ function salvar(){
   }
 
   salvando = true;
+  tentativasConfirmacao = 0;
+  requisicaoAtual = criarId();
 
   const botao = document.getElementById('btnSalvar');
   botao.disabled = true;
-  botao.textContent = '⚔️ SALVANDO ALISTAMENTO...';
+  botao.textContent = '⚔️ SALVANDO E CONFIRMANDO...';
 
+  mostrarMensagem(
+    'Salvando na planilha. Aguarde a confirmação...',
+    'info'
+  );
+
+  document.getElementById('postRequisicaoId').value = requisicaoAtual;
   document.getElementById('postNome').value = nome;
   document.getElementById('postConvidados').value = JSON.stringify(convidados);
 
-  const iframe = document.getElementById('destinoAppsScript');
-  let primeiroLoad = true;
-
-  iframe.onload = function(){
-    if(primeiroLoad){
-      primeiroLoad = false;
-      return;
-    }
-
-    if(timerConfirmacao){
-      clearTimeout(timerConfirmacao);
-      timerConfirmacao = null;
-    }
-
-    finalizarVisualmente(nome, convidados.length);
-  };
-
   document.getElementById('formAppsScript').submit();
 
-  /*
-    Segurança visual: alguns navegadores não disparam onload de iframe
-    de forma previsível após redirecionamentos do Apps Script.
-    O POST já foi enviado; após alguns segundos liberamos a tela.
-  */
-  timerConfirmacao = setTimeout(function(){
-    if(salvando){
-      finalizarVisualmente(nome, convidados.length);
-    }
-  }, 5000);
+  setTimeout(consultarConfirmacao, 1200);
 }
 </script>
-
 </body>
 </html>
