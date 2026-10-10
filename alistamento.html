@@ -1,698 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alistamento</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
-
   margin:0;
-
   min-height:100vh;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:white;
-
   background:
-    radial-gradient(
-      circle at top right,
-      #5c0b0b,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      #07324a,
-      transparent 40%
-    ),
+    radial-gradient(circle at top right,#5c0b0b,transparent 40%),
+    radial-gradient(circle at bottom left,#07324a,transparent 40%),
     #05090d;
-
   display:flex;
-
   justify-content:center;
-
   align-items:center;
-
   padding:20px;
 }
 
-
 .container{
-
   width:100%;
-
   max-width:600px;
-
-  background:
-    rgba(7,14,21,.96);
-
-  border:
-    1px solid #713239;
-
+  background:rgba(7,14,21,.96);
+  border:1px solid #713239;
   border-radius:25px;
-
   overflow:hidden;
-
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.7);
+  box-shadow:0 20px 70px rgba(0,0,0,.7);
 }
-
 
 .header{
-
   text-align:center;
-
   padding:30px 20px;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(150,0,10,.6),
-      rgba(30,0,5,.3)
-    );
-
-  border-bottom:
-    1px solid #8f242b;
+  background:linear-gradient(180deg,rgba(150,0,10,.6),rgba(30,0,5,.3));
+  border-bottom:1px solid #8f242b;
 }
 
-
 .escudo{
-
   font-size:65px;
-
   margin-bottom:10px;
 }
 
-
 .header h1{
-
   margin:0;
-
-  font-family:
-    Georgia,
-    serif;
-
+  font-family:Georgia,serif;
   font-size:30px;
 }
 
-
 .header h2{
-
-  margin:
-    5px 0 0;
-
+  margin:5px 0 0;
   color:#e1242d;
-
   font-size:18px;
 }
 
-
-.conteudo{
-
-  padding:25px;
-}
-
+.conteudo{padding:25px;}
 
 label{
-
   display:block;
-
   margin-bottom:7px;
-
   font-size:14px;
-
   font-weight:bold;
-
   color:#ccd3da;
 }
 
-
 input{
-
   width:100%;
-
-  border:
-    1px solid #40505e;
-
+  border:1px solid #40505e;
   background:#0b1620;
-
   color:#fff;
-
   border-radius:12px;
-
   padding:15px;
-
   font-size:17px;
-
   outline:none;
 }
 
-
 input:focus{
-
   border-color:#e3212b;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(227,33,43,.12);
+  box-shadow:0 0 0 3px rgba(227,33,43,.12);
 }
 
-
-.grupo{
-
-  margin-bottom:20px;
-}
-
+.grupo{margin-bottom:20px;}
 
 .titulo-convidados{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   margin-top:25px;
-
   margin-bottom:12px;
 }
 
-
-.titulo-convidados strong{
-
-  font-size:20px;
-}
-
+.titulo-convidados strong{font-size:20px;}
 
 .btn-add{
-
   border:0;
-
   border-radius:10px;
-
   background:#173a51;
-
   color:white;
-
   padding:10px 15px;
-
   cursor:pointer;
-
   font-weight:bold;
 }
 
-
 .convidado{
-
   display:grid;
-
-  grid-template-columns:
-    1fr 48px;
-
+  grid-template-columns:1fr 48px;
   gap:8px;
-
   margin-bottom:10px;
 }
 
-
 .remover{
-
   border:0;
-
   border-radius:10px;
-
   background:#4c0d12;
-
   color:white;
-
   font-size:20px;
-
   cursor:pointer;
 }
-
 
 .salvar{
-
   width:100%;
-
   margin-top:25px;
-
   padding:18px;
-
   border:0;
-
   border-radius:14px;
-
   cursor:pointer;
-
   font-size:18px;
-
   font-weight:bold;
-
   color:white;
-
-  background:
-    linear-gradient(
-      180deg,
-      #df1722,
-      #82040b
-    );
-
-  box-shadow:
-    0 10px 30px
-    rgba(200,0,10,.25);
+  background:linear-gradient(180deg,#df1722,#82040b);
+  box-shadow:0 10px 30px rgba(200,0,10,.25);
 }
 
-
 .salvar:disabled{
-
   opacity:.5;
-
   cursor:not-allowed;
 }
 
-
 .mensagem{
-
   display:none;
-
   margin-top:20px;
-
   padding:20px;
-
   border-radius:15px;
-
   text-align:center;
-
   font-weight:bold;
 }
 
-
 .sucesso{
-
   display:block;
-
-  background:
-    rgba(0,130,65,.18);
-
-  border:
-    1px solid #138e50;
-
+  background:rgba(0,130,65,.18);
+  border:1px solid #138e50;
   color:#79e5aa;
 }
 
-
 .erro{
-
   display:block;
-
-  background:
-    rgba(200,20,30,.15);
-
-  border:
-    1px solid #b32a32;
-
+  background:rgba(200,20,30,.15);
+  border:1px solid #b32a32;
   color:#ff8f96;
 }
 
-
 .resumo{
-
   text-align:center;
-
   padding:15px;
-
   font-size:13px;
-
   color:#84909a;
-
-  border-top:
-    1px solid rgba(255,255,255,.07);
+  border-top:1px solid rgba(255,255,255,.07);
 }
-
 </style>
-
 </head>
-
 
 <body>
 
 <div class="container">
-
-
-<div class="header">
-
-  <div class="escudo">
-    🛡️⚔️
+  <div class="header">
+    <div class="escudo">🛡️⚔️</div>
+    <h1>ALISTAMENTO</h1>
+    <h2>SEMANA DE LIBERTAÇÃO<br>& BATALHA ESPIRITUAL</h2>
   </div>
 
-  <h1>
-    ALISTAMENTO
-  </h1>
+  <div class="conteudo">
 
-  <h2>
-    SEMANA DE LIBERTAÇÃO
-    <br>
-    & BATALHA ESPIRITUAL
-  </h2>
+    <div class="grupo">
+      <label>SEU NOME</label>
+      <input id="nome" type="text" placeholder="Ex.: Maria de Fátima" autocomplete="name">
+    </div>
 
+    <div class="titulo-convidados">
+      <strong>👥 Convidados</strong>
+      <button class="btn-add" type="button" onclick="adicionarConvidado()">+ ADICIONAR</button>
+    </div>
+
+    <div id="convidados"></div>
+
+    <button id="btnSalvar" class="salvar" type="button" onclick="salvar()">
+      🛡️ REALIZAR ALISTAMENTO
+    </button>
+
+    <div id="mensagem" class="mensagem"></div>
+  </div>
+
+  <div class="resumo">
+    📅 26 DE OUTUBRO A 1º DE NOVEMBRO DE 2026
+  </div>
 </div>
-
-
-<div class="conteudo">
-
-
-<div class="grupo">
-
-  <label>
-    SEU NOME
-  </label>
-
-  <input
-    id="nome"
-    type="text"
-    placeholder="Ex.: Maria de Fátima"
-    autocomplete="name">
-
-</div>
-
-
-<div class="titulo-convidados">
-
-  <strong>
-    👥 Convidados
-  </strong>
-
-  <button
-    class="btn-add"
-    type="button"
-    onclick="adicionarConvidado()">
-
-    + ADICIONAR
-
-  </button>
-
-</div>
-
-
-<div id="convidados"></div>
-
-
-<button
-  id="btnSalvar"
-  class="salvar"
-  type="button"
-  onclick="salvar()">
-
-  🛡️ REALIZAR ALISTAMENTO
-
-</button>
-
-
-<div
-  id="mensagem"
-  class="mensagem">
-</div>
-
-
-</div>
-
-
-<div class="resumo">
-
-  📅 26 DE OUTUBRO A
-  1º DE NOVEMBRO DE 2026
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-     PONTE INVISÍVEL COM O APPS SCRIPT
-===================================================== -->
 
 <iframe
   id="bridgeAlistamento"
   src="https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec?p=bridge-alistamento"
-  style="
-    position:absolute;
-    width:1px;
-    height:1px;
-    border:0;
-    opacity:0;
-    pointer-events:none;
-  "
+  style="position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none;"
   aria-hidden="true">
 </iframe>
 
-
 <script>
-
 let contador = 0;
-
 let bridgePronto = false;
-
 let salvando = false;
+let dadosPendentes = null;
 
-
-const bridgeAlistamento =
-  document.getElementById(
-    'bridgeAlistamento'
-  );
-
-
-/* =====================================================
-   ADICIONAR CONVIDADO
-===================================================== */
+const bridgeAlistamento = document.getElementById('bridgeAlistamento');
+const btnSalvar = document.getElementById('btnSalvar');
 
 function adicionarConvidado(){
-
   contador++;
 
-  const div =
-    document.createElement(
-      'div'
-    );
-
-  div.className =
-    'convidado';
+  const div = document.createElement('div');
+  div.className = 'convidado';
 
   div.innerHTML = `
-
-    <input
-      class="input-convidado"
-      type="text"
-      placeholder="Nome do convidado">
-
-    <button
-      class="remover"
-      type="button"
-      onclick="this.parentElement.remove()">
-
-      ×
-
-    </button>
-
+    <input class="input-convidado" type="text" placeholder="Nome do convidado">
+    <button class="remover" type="button" onclick="this.parentElement.remove()">×</button>
   `;
 
-  document.getElementById(
-    'convidados'
-  ).appendChild(
-    div
-  );
-
+  document.getElementById('convidados').appendChild(div);
 }
-
-
-/* =====================================================
-   COMEÇA COM 1 CAMPO
-===================================================== */
 
 adicionarConvidado();
 
-
-/* =====================================================
-   MENSAGEM
-===================================================== */
-
-function mostrarMensagem(
-  texto,
-  tipo
-){
-
-  const elemento =
-    document.getElementById(
-      'mensagem'
-    );
-
-  elemento.className =
-    'mensagem ' + tipo;
-
-  elemento.textContent =
-    texto;
-
+function mostrarMensagem(texto,tipo){
+  const elemento = document.getElementById('mensagem');
+  elemento.className = 'mensagem ' + tipo;
+  elemento.textContent = texto;
 }
 
-
-/* =====================================================
-   RECEBER RESPOSTA DO APPS SCRIPT
-===================================================== */
-
-window.addEventListener(
-  'message',
-  function(event){
-
-    /*
-      GARANTE QUE A RESPOSTA VEIO
-      DO IFRAME DA PONTE
-    */
-
-    if(
-      event.source !==
-      bridgeAlistamento.contentWindow
-    ){
-      return;
+function enviarPing(){
+  try{
+    if(bridgeAlistamento && bridgeAlistamento.contentWindow){
+      bridgeAlistamento.contentWindow.postMessage({
+        tipo:'PING_ALISTAMENTO'
+      }, '*');
     }
+  }catch(e){}
+}
 
+bridgeAlistamento.addEventListener('load', function(){
+  enviarPing();
+});
 
-    const mensagem =
-      event.data || {};
-
-
-    /* PONTE PRONTA */
-
-    if(
-      mensagem.tipo ===
-      'ALISTAMENTO_BRIDGE_PRONTO'
-    ){
-
-      bridgePronto =
-        true;
-
-      return;
-    }
-
-
-    /* SALVOU COM SUCESSO */
-
-    if(
-      mensagem.tipo ===
-      'ALISTAMENTO_SUCESSO'
-    ){
-
-      salvando =
-        false;
-
-
-      const resultado =
-        mensagem.resultado || {};
-
-
-      const botao =
-        document.getElementById(
-          'btnSalvar'
-        );
-
-
-      mostrarMensagem(
-
-        '🛡️ ' +
-        (resultado.nome || '') +
-        ', alistamento realizado! ' +
-        (resultado.quantidade || 0) +
-        ' convidado(s) registrado(s).',
-
-        'sucesso'
-
-      );
-
-
-      document.getElementById(
-        'nome'
-      ).value = '';
-
-
-      document.getElementById(
-        'convidados'
-      ).innerHTML = '';
-
-
-      adicionarConvidado();
-
-
-      botao.disabled =
-        false;
-
-
-      botao.textContent =
-        '🛡️ REALIZAR NOVO ALISTAMENTO';
-
-
-      return;
-
-    }
-
-
-    /* ERRO AO SALVAR */
-
-    if(
-      mensagem.tipo ===
-      'ALISTAMENTO_ERRO'
-    ){
-
-      salvando =
-        false;
-
-
-      const botao =
-        document.getElementById(
-          'btnSalvar'
-        );
-
-
-      mostrarMensagem(
-
-        mensagem.erro ||
-        'Erro ao salvar o alistamento.',
-
-        'erro'
-
-      );
-
-
-      botao.disabled =
-        false;
-
-
-      botao.textContent =
-        '🛡️ REALIZAR ALISTAMENTO';
-
-    }
-
+const pingTimer = setInterval(function(){
+  if(bridgePronto){
+    clearInterval(pingTimer);
+    return;
   }
-);
+  enviarPing();
+}, 1000);
 
+window.addEventListener('message', function(event){
 
-/* =====================================================
-   SALVAR
-===================================================== */
+  if(event.source !== bridgeAlistamento.contentWindow){
+    return;
+  }
+
+  const mensagem = event.data || {};
+
+  if(mensagem.tipo === 'ALISTAMENTO_BRIDGE_PRONTO'){
+
+    bridgePronto = true;
+    clearInterval(pingTimer);
+
+    if(dadosPendentes && salvando){
+      enviarAlistamento(dadosPendentes);
+    }
+
+    return;
+  }
+
+  if(mensagem.tipo === 'ALISTAMENTO_SUCESSO'){
+
+    salvando = false;
+    dadosPendentes = null;
+
+    const resultado = mensagem.resultado || {};
+
+    mostrarMensagem(
+      '🛡️ ' +
+      (resultado.nome || '') +
+      ', alistamento realizado! ' +
+      (resultado.quantidade || 0) +
+      ' convidado(s) registrado(s).',
+      'sucesso'
+    );
+
+    document.getElementById('nome').value = '';
+    document.getElementById('convidados').innerHTML = '';
+    adicionarConvidado();
+
+    btnSalvar.disabled = false;
+    btnSalvar.textContent = '🛡️ REALIZAR NOVO ALISTAMENTO';
+
+    return;
+  }
+
+  if(mensagem.tipo === 'ALISTAMENTO_ERRO'){
+
+    salvando = false;
+    dadosPendentes = null;
+
+    mostrarMensagem(
+      mensagem.erro || 'Erro ao salvar o alistamento.',
+      'erro'
+    );
+
+    btnSalvar.disabled = false;
+    btnSalvar.textContent = '🛡️ REALIZAR ALISTAMENTO';
+  }
+});
+
+function enviarAlistamento(dados){
+  bridgeAlistamento.contentWindow.postMessage({
+    tipo:'SALVAR_ALISTAMENTO',
+    dados:dados
+  }, '*');
+}
 
 function salvar(){
 
@@ -700,113 +342,63 @@ function salvar(){
     return;
   }
 
+  const nome = document.getElementById('nome').value.trim();
 
-  const nome =
-    document
-      .getElementById(
-        'nome'
-      )
-      .value
-      .trim();
-
-
-  const convidados =
-    Array.from(
-      document.querySelectorAll(
-        '.input-convidado'
-      )
-    )
-    .map(
-      input =>
-        input.value.trim()
-    )
-    .filter(Boolean);
-
+  const convidados = Array.from(
+    document.querySelectorAll('.input-convidado')
+  )
+  .map(function(input){
+    return input.value.trim();
+  })
+  .filter(Boolean);
 
   if(!nome){
-
-    mostrarMensagem(
-      'Informe seu nome.',
-      'erro'
-    );
-
+    mostrarMensagem('Informe seu nome.','erro');
     return;
   }
 
-
-  if(
-    convidados.length === 0
-  ){
-
-    mostrarMensagem(
-      'Informe pelo menos um convidado.',
-      'erro'
-    );
-
+  if(convidados.length === 0){
+    mostrarMensagem('Informe pelo menos um convidado.','erro');
     return;
   }
 
+  salvando = true;
+  dadosPendentes = {
+    nome:nome,
+    convidados:convidados
+  };
 
-  if(!bridgePronto){
+  btnSalvar.disabled = true;
+  btnSalvar.textContent = '⚔️ CONECTANDO E SALVANDO...';
 
-    mostrarMensagem(
-      'Conexão ainda está carregando. Aguarde alguns segundos e tente novamente.',
-      'erro'
-    );
-
+  if(bridgePronto){
+    enviarAlistamento(dadosPendentes);
     return;
   }
 
+  mostrarMensagem(
+    'Conectando ao sistema... aguarde alguns segundos.',
+    'erro'
+  );
 
-  const botao =
-    document.getElementById(
-      'btnSalvar'
-    );
+  enviarPing();
 
+  setTimeout(function(){
+    if(salvando && !bridgePronto){
+      salvando = false;
+      dadosPendentes = null;
+      btnSalvar.disabled = false;
+      btnSalvar.textContent = '🛡️ REALIZAR ALISTAMENTO';
 
-  salvando =
-    true;
-
-
-  botao.disabled =
-    true;
-
-
-  botao.textContent =
-    '⚔️ SALVANDO ALISTAMENTO...';
-
-
-  /* ===================================================
-     ENVIA PARA A PONTE DO APPS SCRIPT
-  =================================================== */
-
-  bridgeAlistamento
-    .contentWindow
-    .postMessage(
-
-      {
-
-        tipo:
-          'SALVAR_ALISTAMENTO',
-
-        dados: {
-
-          nome:
-            nome,
-
-          convidados:
-            convidados
-
-        }
-
-      },
-
-      '*'
-
-    );
-
+      mostrarMensagem(
+        'Não foi possível conectar ao sistema. Atualize a página e tente novamente.',
+        'erro'
+      );
+    }
+  }, 15000);
 }
 
+enviarPing();
 </script>
 
 </body>
