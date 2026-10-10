@@ -5,10 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Alistamento</title>
 
@@ -21,6 +19,7 @@
 body{
 
   margin:0;
+
   min-height:100vh;
 
   font-family:
@@ -44,7 +43,9 @@ body{
     #05090d;
 
   display:flex;
+
   justify-content:center;
+
   align-items:center;
 
   padding:20px;
@@ -54,6 +55,7 @@ body{
 .container{
 
   width:100%;
+
   max-width:600px;
 
   background:
@@ -67,8 +69,7 @@ body{
   overflow:hidden;
 
   box-shadow:
-    0 20px 70px
-    rgba(0,0,0,.7);
+    0 20px 70px rgba(0,0,0,.7);
 }
 
 
@@ -93,6 +94,7 @@ body{
 .escudo{
 
   font-size:65px;
+
   margin-bottom:10px;
 }
 
@@ -111,7 +113,8 @@ body{
 
 .header h2{
 
-  margin:5px 0 0;
+  margin:
+    5px 0 0;
 
   color:#e1242d;
 
@@ -180,8 +183,7 @@ input:focus{
 
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   align-items:center;
 
@@ -340,8 +342,7 @@ input:focus{
   color:#84909a;
 
   border-top:
-    1px solid
-    rgba(255,255,255,.07);
+    1px solid rgba(255,255,255,.07);
 }
 
 </style>
@@ -386,8 +387,7 @@ input:focus{
     id="nome"
     type="text"
     placeholder="Ex.: Maria de Fátima"
-    autocomplete="name"
-  >
+    autocomplete="name">
 
 </div>
 
@@ -401,8 +401,7 @@ input:focus{
   <button
     class="btn-add"
     type="button"
-    onclick="adicionarConvidado()"
-  >
+    onclick="adicionarConvidado()">
 
     + ADICIONAR
 
@@ -418,8 +417,7 @@ input:focus{
   id="btnSalvar"
   class="salvar"
   type="button"
-  onclick="salvar()"
->
+  onclick="salvar()">
 
   🛡️ REALIZAR ALISTAMENTO
 
@@ -428,8 +426,8 @@ input:focus{
 
 <div
   id="mensagem"
-  class="mensagem"
-></div>
+  class="mensagem">
+</div>
 
 
 </div>
@@ -446,19 +444,38 @@ input:focus{
 </div>
 
 
+<!-- =====================================================
+     PONTE INVISÍVEL COM O APPS SCRIPT
+===================================================== -->
+
+<iframe
+  id="bridgeAlistamento"
+  src="https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec?p=bridge-alistamento"
+  style="
+    position:absolute;
+    width:1px;
+    height:1px;
+    border:0;
+    opacity:0;
+    pointer-events:none;
+  "
+  aria-hidden="true">
+</iframe>
+
+
 <script>
-
-/* =====================================================
-   NOVA IMPLANTAÇÃO DO APPS SCRIPT
-===================================================== */
-
-const APPS_SCRIPT_URL =
-'https://script.google.com/macros/s/AKfycbyG6VlTPwSGx-g3dugFQdcfOSRiWZTXTySErhuC54c6D2jwFjF61mjyaglRjVKr8ff_/exec';
-
 
 let contador = 0;
 
+let bridgePronto = false;
+
 let salvando = false;
+
+
+const bridgeAlistamento =
+  document.getElementById(
+    'bridgeAlistamento'
+  );
 
 
 /* =====================================================
@@ -477,20 +494,17 @@ function adicionarConvidado(){
   div.className =
     'convidado';
 
-
   div.innerHTML = `
 
     <input
       class="input-convidado"
       type="text"
-      placeholder="Nome do convidado"
-    >
+      placeholder="Nome do convidado">
 
     <button
       class="remover"
       type="button"
-      onclick="this.parentElement.remove()"
-    >
+      onclick="this.parentElement.remove()">
 
       ×
 
@@ -498,18 +512,17 @@ function adicionarConvidado(){
 
   `;
 
-
-  document
-    .getElementById(
-      'convidados'
-    )
-    .appendChild(div);
+  document.getElementById(
+    'convidados'
+  ).appendChild(
+    div
+  );
 
 }
 
 
 /* =====================================================
-   COMEÇA COM UM CONVIDADO
+   COMEÇA COM 1 CAMPO
 ===================================================== */
 
 adicionarConvidado();
@@ -529,10 +542,8 @@ function mostrarMensagem(
       'mensagem'
     );
 
-
   elemento.className =
     'mensagem ' + tipo;
-
 
   elemento.textContent =
     texto;
@@ -541,86 +552,142 @@ function mostrarMensagem(
 
 
 /* =====================================================
-   RESULTADO DO APPS SCRIPT
+   RECEBER RESPOSTA DO APPS SCRIPT
 ===================================================== */
 
-function receberResultadoAlistamento(
-  resultado
-){
+window.addEventListener(
+  'message',
+  function(event){
 
-  salvando = false;
+    /*
+      GARANTE QUE A RESPOSTA VEIO
+      DO IFRAME DA PONTE
+    */
 
-
-  const botao =
-    document.getElementById(
-      'btnSalvar'
-    );
-
-
-  botao.disabled =
-    false;
-
-
-  if(
-    !resultado ||
-    resultado.ok === false
-  ){
-
-    mostrarMensagem(
-
-      resultado &&
-      resultado.erro
-        ? resultado.erro
-        : 'Erro ao realizar o alistamento.',
-
-      'erro'
-
-    );
+    if(
+      event.source !==
+      bridgeAlistamento.contentWindow
+    ){
+      return;
+    }
 
 
-    botao.textContent =
-      '🛡️ REALIZAR ALISTAMENTO';
+    const mensagem =
+      event.data || {};
 
 
-    return;
+    /* PONTE PRONTA */
+
+    if(
+      mensagem.tipo ===
+      'ALISTAMENTO_BRIDGE_PRONTO'
+    ){
+
+      bridgePronto =
+        true;
+
+      return;
+    }
+
+
+    /* SALVOU COM SUCESSO */
+
+    if(
+      mensagem.tipo ===
+      'ALISTAMENTO_SUCESSO'
+    ){
+
+      salvando =
+        false;
+
+
+      const resultado =
+        mensagem.resultado || {};
+
+
+      const botao =
+        document.getElementById(
+          'btnSalvar'
+        );
+
+
+      mostrarMensagem(
+
+        '🛡️ ' +
+        (resultado.nome || '') +
+        ', alistamento realizado! ' +
+        (resultado.quantidade || 0) +
+        ' convidado(s) registrado(s).',
+
+        'sucesso'
+
+      );
+
+
+      document.getElementById(
+        'nome'
+      ).value = '';
+
+
+      document.getElementById(
+        'convidados'
+      ).innerHTML = '';
+
+
+      adicionarConvidado();
+
+
+      botao.disabled =
+        false;
+
+
+      botao.textContent =
+        '🛡️ REALIZAR NOVO ALISTAMENTO';
+
+
+      return;
+
+    }
+
+
+    /* ERRO AO SALVAR */
+
+    if(
+      mensagem.tipo ===
+      'ALISTAMENTO_ERRO'
+    ){
+
+      salvando =
+        false;
+
+
+      const botao =
+        document.getElementById(
+          'btnSalvar'
+        );
+
+
+      mostrarMensagem(
+
+        mensagem.erro ||
+        'Erro ao salvar o alistamento.',
+
+        'erro'
+
+      );
+
+
+      botao.disabled =
+        false;
+
+
+      botao.textContent =
+        '🛡️ REALIZAR ALISTAMENTO';
+
+    }
 
   }
-
-
-  mostrarMensagem(
-
-    '🛡️ ' +
-    resultado.nome +
-    ', alistamento realizado! ' +
-    resultado.quantidade +
-    ' convidado(s) registrado(s).',
-
-    'sucesso'
-
-  );
-
-
-  document
-    .getElementById(
-      'nome'
-    )
-    .value = '';
-
-
-  document
-    .getElementById(
-      'convidados'
-    )
-    .innerHTML = '';
-
-
-  adicionarConvidado();
-
-
-  botao.textContent =
-    '🛡️ REALIZAR NOVO ALISTAMENTO';
-
-}
+);
 
 
 /* =====================================================
@@ -645,19 +712,14 @@ function salvar(){
 
   const convidados =
     Array.from(
-
       document.querySelectorAll(
         '.input-convidado'
       )
-
     )
-
     .map(
-      function(input){
-        return input.value.trim();
-      }
+      input =>
+        input.value.trim()
     )
-
     .filter(Boolean);
 
 
@@ -669,7 +731,6 @@ function salvar(){
     );
 
     return;
-
   }
 
 
@@ -683,17 +744,28 @@ function salvar(){
     );
 
     return;
-
   }
 
 
-  salvando = true;
+  if(!bridgePronto){
+
+    mostrarMensagem(
+      'Conexão ainda está carregando. Aguarde alguns segundos e tente novamente.',
+      'erro'
+    );
+
+    return;
+  }
 
 
   const botao =
     document.getElementById(
       'btnSalvar'
     );
+
+
+  salvando =
+    true;
 
 
   botao.disabled =
@@ -704,103 +776,38 @@ function salvar(){
     '⚔️ SALVANDO ALISTAMENTO...';
 
 
-  /* REMOVE CHAMADA ANTERIOR */
+  /* ===================================================
+     ENVIA PARA A PONTE DO APPS SCRIPT
+  =================================================== */
 
-  const antigo =
-    document.getElementById(
-      'scriptSalvarAlistamento'
+  bridgeAlistamento
+    .contentWindow
+    .postMessage(
+
+      {
+
+        tipo:
+          'SALVAR_ALISTAMENTO',
+
+        dados: {
+
+          nome:
+            nome,
+
+          convidados:
+            convidados
+
+        }
+
+      },
+
+      '*'
+
     );
-
-
-  if(antigo){
-    antigo.remove();
-  }
-
-
-  /* MONTA A CHAMADA JSONP */
-
-  const parametros =
-    new URLSearchParams();
-
-
-  parametros.set(
-    'api',
-    'salvarAlistamento'
-  );
-
-
-  parametros.set(
-    'callback',
-    'receberResultadoAlistamento'
-  );
-
-
-  parametros.set(
-    'nome',
-    nome
-  );
-
-
-  parametros.set(
-    'convidados',
-    JSON.stringify(
-      convidados
-    )
-  );
-
-
-  parametros.set(
-    't',
-    Date.now()
-  );
-
-
-  const script =
-    document.createElement(
-      'script'
-    );
-
-
-  script.id =
-    'scriptSalvarAlistamento';
-
-
-  script.src =
-    APPS_SCRIPT_URL +
-    '?' +
-    parametros.toString();
-
-
-  script.onerror =
-    function(){
-
-      salvando = false;
-
-
-      botao.disabled =
-        false;
-
-
-      botao.textContent =
-        '🛡️ REALIZAR ALISTAMENTO';
-
-
-      mostrarMensagem(
-        'Não foi possível conectar ao sistema. Tente novamente.',
-        'erro'
-      );
-
-    };
-
-
-  document.body.appendChild(
-    script
-  );
 
 }
 
 </script>
 
 </body>
-
 </html>
